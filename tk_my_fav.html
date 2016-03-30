@@ -37,8 +37,102 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="tk-my-fav-module">
-<h1>tk_my_fav module<a class="headerlink" href="#tk-my-fav-module" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="module-tk_my_fav">
+<span id="tk-my-fav-module"></span><h1>tk_my_fav module<a class="headerlink" href="#module-tk_my_fav" title="Permalink to this headline">¶</a></h1>
+<dl class="class">
+<dt id="tk_my_fav.BindLabel">
+<em class="property">class </em><code class="descclassname">tk_my_fav.</code><code class="descname">BindLabel</code><a class="reference internal" href="_modules/tk_my_fav.html#BindLabel"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_my_fav.BindLabel" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>tk.Frameとデータを受けてLabelを作成するクラス</p>
+<dl class="attribute">
+<dt id="tk_my_fav.BindLabel.IMAGE_COLUMN_NUMBER">
+<code class="descname">IMAGE_COLUMN_NUMBER</code><em class="property"> = 2</em><a class="headerlink" href="#tk_my_fav.BindLabel.IMAGE_COLUMN_NUMBER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="tk_my_fav.BindLabel.TEXT_COLUMN_NUMBER">
+<code class="descname">TEXT_COLUMN_NUMBER</code><em class="property"> = 1</em><a class="headerlink" href="#tk_my_fav.BindLabel.TEXT_COLUMN_NUMBER" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="staticmethod">
+<dt id="tk_my_fav.BindLabel.image">
+<em class="property">static </em><code class="descname">image</code><span class="sig-paren">(</span><em>frame: tkinter.Frame</em>, <em>data: lib.cell_data.CellData</em>, <em>row_number: int</em>, <em>column_number: int = 2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_my_fav.html#BindLabel.image"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_my_fav.BindLabel.image" title="Permalink to this definition">¶</a></dt>
+<dd><p>CellDataのimageを利用し、フレームにLabelを表示する</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>frame</strong> (<em>tk.Frame</em>) &#8211; tkのフレームオブジェクト</li>
+<li><strong>data</strong> (<a class="reference internal" href="lib.html#lib.cell_data.CellData" title="lib.cell_data.CellData"><em>CellData</em></a>) &#8211; CellData</li>
+<li><strong>row_number</strong> (<em>int</em>) &#8211; 何行目に表示するか</li>
+<li><strong>column_number</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="staticmethod">
+<dt id="tk_my_fav.BindLabel.text">
+<em class="property">static </em><code class="descname">text</code><span class="sig-paren">(</span><em>frame: tkinter.Frame</em>, <em>data: lib.cell_data.CellData</em>, <em>row_number: int</em>, <em>column_number: int = 1</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_my_fav.html#BindLabel.text"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_my_fav.BindLabel.text" title="Permalink to this definition">¶</a></dt>
+<dd><p>CellDataのテキストを利用し、フレームにLabelを表示する</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>frame</strong> (<em>tk.Frame</em>) &#8211; tkのフレームオブジェクト</li>
+<li><strong>data</strong> (<a class="reference internal" href="lib.html#lib.cell_data.CellData" title="lib.cell_data.CellData"><em>CellData</em></a>) &#8211; CellData</li>
+<li><strong>row_number</strong> (<em>int</em>) &#8211; 何行目に表示するか</li>
+<li><strong>column_number</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk_my_fav.LabelListManager">
+<em class="property">class </em><code class="descclassname">tk_my_fav.</code><code class="descname">LabelListManager</code><span class="sig-paren">(</span><em>frame: tkinter.Frame</em>, <em>data: typing.List[lib.cell_data.CellData] = None</em>, <em>initial_row: int = 2</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_my_fav.html#LabelListManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_my_fav.LabelListManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>List[CellData]をtk.Labelでリスト表示するクラス</p>
+<dl class="method">
+<dt id="tk_my_fav.LabelListManager.update">
+<code class="descname">update</code><span class="sig-paren">(</span><em>data</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_my_fav.html#LabelListManager.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_my_fav.LabelListManager.update" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>data</strong> (<em>List[CellData]</em>) &#8211; </td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="class">
+<dt id="tk_my_fav.TkMyFav">
+<em class="property">class </em><code class="descclassname">tk_my_fav.</code><code class="descname">TkMyFav</code><span class="sig-paren">(</span><em>root: tkinter.Tk</em>, <em>data_source: lib.data_source_manager.DataSourceManager</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_my_fav.html#TkMyFav"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_my_fav.TkMyFav" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">tkinter.Frame</span></code></p>
+<dl class="method">
+<dt id="tk_my_fav.TkMyFav.on_frame_configure">
+<code class="descname">on_frame_configure</code><span class="sig-paren">(</span><em>event</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_my_fav.html#TkMyFav.on_frame_configure"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_my_fav.TkMyFav.on_frame_configure" title="Permalink to this definition">¶</a></dt>
+<dd><p>Reset the scroll region to encompass the inner frame</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="tk_my_fav.TkMyFav.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/tk_my_fav.html#TkMyFav.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#tk_my_fav.TkMyFav.update" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
 
 

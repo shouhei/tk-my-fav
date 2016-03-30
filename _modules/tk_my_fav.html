@@ -1,0 +1,206 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>tk_my_fav &mdash; src  documentation</title>
+    
+    <link rel="stylesheet" href="../_static/alabaster.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '../',
+        VERSION:     '',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../_static/jquery.js"></script>
+    <script type="text/javascript" src="../_static/underscore.js"></script>
+    <script type="text/javascript" src="../_static/doctools.js"></script>
+    <link rel="top" title="src  documentation" href="../index.html" />
+    <link rel="up" title="Module code" href="index.html" />
+   
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head>
+  <body role="document">  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <h1>Source code for tk_my_fav</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">tkinter</span> <span class="kn">as</span> <span class="nn">tk</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">Image</span> <span class="k">as</span> <span class="n">PILImage</span>
+<span class="kn">from</span> <span class="nn">PIL</span> <span class="kn">import</span> <span class="n">ImageTk</span> <span class="k">as</span> <span class="n">PILImageTk</span>
+<span class="kn">from</span> <span class="nn">urllib</span> <span class="kn">import</span> <span class="n">request</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+<span class="kn">from</span> <span class="nn">webbrowser</span> <span class="kn">import</span> <span class="n">open_new_tab</span>
+<span class="kn">from</span> <span class="nn">lib.datasource.twitter</span> <span class="kn">import</span> <span class="n">Twitter</span>
+<span class="kn">from</span> <span class="nn">config.twitter</span> <span class="kn">import</span> <span class="n">CONSUMER_KEY</span><span class="p">,</span> <span class="n">CONSUMER_SECRET</span><span class="p">,</span> <span class="n">ACCESS_TOKEN</span><span class="p">,</span> <span class="n">ACCESS_SECRET</span>
+<span class="kn">from</span> <span class="nn">lib.datasource.hatena</span> <span class="kn">import</span> <span class="n">Hatena</span>
+<span class="kn">from</span> <span class="nn">config.hatena</span> <span class="kn">import</span> <span class="n">USER_NAME</span>
+<span class="kn">from</span> <span class="nn">lib.data_source_manager</span> <span class="kn">import</span> <span class="n">DataSourceManager</span>
+<span class="kn">from</span> <span class="nn">lib.cell_data</span> <span class="kn">import</span> <span class="n">CellData</span>
+
+
+<div class="viewcode-block" id="LabelListManager"><a class="viewcode-back" href="../tk_my_fav.html#tk_my_fav.LabelListManager">[docs]</a><span class="k">class</span> <span class="nc">LabelListManager</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    List[CellData]をtk.Labelでリスト表示するクラス</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">frame</span><span class="p">:</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CellData</span><span class="p">]</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">initial_row</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param tk.Frame frame: tkのフレーム</span>
+<span class="sd">        :param List[CellData] data: CellDataの入ったリスト</span>
+<span class="sd">        :param int initial_row: データをリスト表示する際の初期位置</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__frame</span> <span class="o">=</span> <span class="n">frame</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__initial_row</span> <span class="o">=</span> <span class="n">initial_row</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<div class="viewcode-block" id="LabelListManager.update"><a class="viewcode-back" href="../tk_my_fav.html#tk_my_fav.LabelListManager.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        :param List[CellData] data:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">row_num</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">__initial_row</span>
+        <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">BindLabel</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__frame</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">row_num</span><span class="p">)</span>
+            <span class="c1"># 以下URLから取得した画像を表示するラベル</span>
+            <span class="k">if</span> <span class="n">row</span><span class="o">.</span><span class="n">image</span><span class="p">:</span>
+                <span class="n">BindLabel</span><span class="o">.</span><span class="n">image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__frame</span><span class="p">,</span> <span class="n">row</span><span class="p">,</span> <span class="n">row_num</span><span class="p">)</span>
+            <span class="n">row_num</span> <span class="o">+=</span> <span class="mi">1</span></div></div>
+
+
+<div class="viewcode-block" id="BindLabel"><a class="viewcode-back" href="../tk_my_fav.html#tk_my_fav.BindLabel">[docs]</a><span class="k">class</span> <span class="nc">BindLabel</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    tk.Frameとデータを受けてLabelを作成するクラス</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">TEXT_COLUMN_NUMBER</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">IMAGE_COLUMN_NUMBER</span> <span class="o">=</span> <span class="mi">2</span>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="BindLabel.text"><a class="viewcode-back" href="../tk_my_fav.html#tk_my_fav.BindLabel.text">[docs]</a>    <span class="k">def</span> <span class="nf">text</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">CellData</span><span class="p">,</span> <span class="n">row_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">column_number</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="n">TEXT_COLUMN_NUMBER</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        CellDataのテキストを利用し、フレームにLabelを表示する</span>
+
+<span class="sd">        :param tk.Frame frame: tkのフレームオブジェクト</span>
+<span class="sd">        :param CellData data:  CellData</span>
+<span class="sd">        :param int row_number: 何行目に表示するか</span>
+<span class="sd">        :param column_number:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">,</span> <span class="n">justify</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">LEFT</span><span class="p">,</span> <span class="n">wraplength</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
+        <span class="n">label</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="n">row_number</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">data</span><span class="o">.</span><span class="n">url</span><span class="p">:</span>
+            <span class="n">label</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Button-1&gt;&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">e</span><span class="p">,</span> <span class="n">url</span><span class="o">=</span><span class="n">data</span><span class="o">.</span><span class="n">url</span><span class="p">:</span> <span class="n">open_new_tab</span><span class="p">(</span><span class="n">url</span><span class="p">))</span></div>
+
+    <span class="nd">@staticmethod</span>
+<div class="viewcode-block" id="BindLabel.image"><a class="viewcode-back" href="../tk_my_fav.html#tk_my_fav.BindLabel.image">[docs]</a>    <span class="k">def</span> <span class="nf">image</span><span class="p">(</span><span class="n">frame</span><span class="p">:</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">CellData</span><span class="p">,</span> <span class="n">row_number</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">column_number</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="n">IMAGE_COLUMN_NUMBER</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        CellDataのimageを利用し、フレームにLabelを表示する</span>
+
+<span class="sd">        :param tk.Frame frame: tkのフレームオブジェクト</span>
+<span class="sd">        :param CellData data:  CellData</span>
+<span class="sd">        :param int row_number: 何行目に表示するか</span>
+<span class="sd">        :param column_number:</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">tmp_image</span><span class="p">,</span> <span class="n">header</span> <span class="o">=</span> <span class="n">request</span><span class="o">.</span><span class="n">urlretrieve</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">image</span><span class="p">)</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">PILImage</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">tmp_image</span><span class="p">)</span>
+        <span class="c1"># 200 = x * image.width</span>
+        <span class="n">rate</span> <span class="o">=</span> <span class="mi">200</span> <span class="o">/</span> <span class="n">img</span><span class="o">.</span><span class="n">width</span>
+        <span class="n">resize_height</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">height</span> <span class="o">*</span> <span class="n">rate</span><span class="p">)</span>
+        <span class="c1"># rezizeのタプルは 幅 * 高さ</span>
+        <span class="n">photo_img</span> <span class="o">=</span> <span class="n">PILImageTk</span><span class="o">.</span><span class="n">PhotoImage</span><span class="p">(</span><span class="n">img</span><span class="o">.</span><span class="n">resize</span><span class="p">((</span><span class="mi">200</span><span class="p">,</span> <span class="n">resize_height</span><span class="p">)))</span>
+        <span class="n">img_label</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Label</span><span class="p">(</span><span class="n">frame</span><span class="p">,</span> <span class="n">image</span><span class="o">=</span><span class="n">photo_img</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">resize_height</span><span class="p">)</span>
+        <span class="c1"># 2度挿入しないと駄目？</span>
+        <span class="n">img_label</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">photo_img</span>
+        <span class="n">img_label</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="n">row_number</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="n">column_number</span><span class="p">,</span> <span class="n">sticky</span><span class="o">=</span><span class="n">tk</span><span class="o">.</span><span class="n">W</span><span class="p">)</span></div></div>
+
+
+<div class="viewcode-block" id="TkMyFav"><a class="viewcode-back" href="../tk_my_fav.html#tk_my_fav.TkMyFav">[docs]</a><span class="k">class</span> <span class="nc">TkMyFav</span><span class="p">(</span><span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">:</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">,</span> <span class="n">data_source</span><span class="p">:</span> <span class="n">DataSourceManager</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_source</span> <span class="o">=</span> <span class="n">data_source</span>
+        <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">root</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__canvas</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Canvas</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">borderwidth</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="mi">500</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__frame</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Frame</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__canvas</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__vsb</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Scrollbar</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;vertical&quot;</span><span class="p">,</span> <span class="n">command</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__canvas</span><span class="o">.</span><span class="n">yview</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__canvas</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s1">&#39;&lt;MouseWheel&gt;&#39;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">__canvas</span><span class="o">.</span><span class="n">yview_scroll</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">*</span><span class="p">(</span><span class="mi">1</span> <span class="k">if</span> <span class="n">e</span><span class="o">.</span><span class="n">delta</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="o">-</span><span class="mi">1</span><span class="p">),</span> <span class="n">tk</span><span class="o">.</span><span class="n">UNITS</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__canvas</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">yscrollcommand</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__vsb</span><span class="o">.</span><span class="n">set</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__vsb</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__canvas</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">&quot;left&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__canvas</span><span class="o">.</span><span class="n">create_window</span><span class="p">((</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="n">window</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__frame</span><span class="p">,</span> <span class="n">anchor</span><span class="o">=</span><span class="s2">&quot;nw&quot;</span><span class="p">,</span> <span class="n">tags</span><span class="o">=</span><span class="s2">&quot;self.frame&quot;</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__frame</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Configure&gt;&quot;</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">on_frame_configure</span><span class="p">)</span>
+        <span class="n">btn</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Button</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__frame</span><span class="p">,</span> <span class="n">text</span><span class="o">=</span><span class="s1">&#39;update&#39;</span><span class="p">)</span>
+        <span class="n">btn</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">row</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__label_list_manager</span> <span class="o">=</span> <span class="n">LabelListManager</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__frame</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">__data_source</span><span class="o">.</span><span class="n">get</span><span class="p">(),</span> <span class="n">initial_row</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+        <span class="n">btn</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="s2">&quot;&lt;Button-1&gt;&quot;</span><span class="p">,</span> <span class="k">lambda</span> <span class="n">e</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">())</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+
+<div class="viewcode-block" id="TkMyFav.update"><a class="viewcode-back" href="../tk_my_fav.html#tk_my_fav.TkMyFav.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__data_source</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__label_list_manager</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">__data_source</span><span class="o">.</span><span class="n">get</span><span class="p">())</span></div>
+
+<div class="viewcode-block" id="TkMyFav.on_frame_configure"><a class="viewcode-back" href="../tk_my_fav.html#tk_my_fav.TkMyFav.on_frame_configure">[docs]</a>    <span class="k">def</span> <span class="nf">on_frame_configure</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event</span><span class="p">):</span>
+        <span class="sd">&#39;&#39;&#39;Reset the scroll region to encompass the inner frame&#39;&#39;&#39;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__canvas</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="n">scrollregion</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">__canvas</span><span class="o">.</span><span class="n">bbox</span><span class="p">(</span><span class="s2">&quot;all&quot;</span><span class="p">))</span></div></div>
+
+
+<span class="k">if</span> <span class="n">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">d</span> <span class="o">=</span> <span class="n">DataSourceManager</span><span class="p">(</span><span class="n">order_by</span><span class="o">=</span><span class="s1">&#39;date&#39;</span><span class="p">)</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Twitter</span><span class="p">(</span><span class="n">CONSUMER_KEY</span><span class="p">,</span> <span class="n">CONSUMER_SECRET</span><span class="p">,</span> <span class="n">ACCESS_TOKEN</span><span class="p">,</span> <span class="n">ACCESS_SECRET</span><span class="p">))</span>
+    <span class="n">d</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="n">Hatena</span><span class="p">(</span><span class="n">USER_NAME</span><span class="p">))</span>
+    <span class="c1">#d.register(Dummy())</span>
+    <span class="n">root</span> <span class="o">=</span> <span class="n">tk</span><span class="o">.</span><span class="n">Tk</span><span class="p">()</span>
+    <span class="n">TkMyFav</span><span class="p">(</span><span class="n">root</span><span class="p">,</span> <span class="n">d</span><span class="p">)</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="n">side</span><span class="o">=</span><span class="s2">&quot;top&quot;</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;both&quot;</span><span class="p">,</span> <span class="n">expand</span><span class="o">=</span><span class="bp">True</span><span class="p">)</span>
+    <span class="n">root</span><span class="o">.</span><span class="n">mainloop</span><span class="p">()</span>
+</pre></div>
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper"><div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../index.html">Documentation overview</a><ul>
+  <li><a href="index.html">Module code</a><ul>
+  </ul></li>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <form class="search" action="../search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2016, Author.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 1.4</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.7</a>
+      
+    </div>
+
+    
+
+    
+  </body>
+</html>

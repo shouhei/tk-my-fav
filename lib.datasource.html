@@ -47,8 +47,8 @@
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="lib.datasource.abstract.html">lib.datasource.abstract package</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="lib.datasource.abstract.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lib.datasource.abstract.html#lib-datasource-abstract-abstract-data-source-module">lib.datasource.abstract.abstract_data_source module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lib.datasource.abstract.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lib.datasource.abstract.html#module-lib.datasource.abstract.abstract_data_source">lib.datasource.abstract.abstract_data_source module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lib.datasource.abstract.html#module-lib.datasource.abstract">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -57,17 +57,102 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="lib-datasource-dummy-module">
-<h2>lib.datasource.dummy module<a class="headerlink" href="#lib-datasource-dummy-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-lib.datasource.dummy">
+<span id="lib-datasource-dummy-module"></span><h2>lib.datasource.dummy module<a class="headerlink" href="#module-lib.datasource.dummy" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="lib.datasource.dummy.Dummy">
+<em class="property">class </em><code class="descclassname">lib.datasource.dummy.</code><code class="descname">Dummy</code><a class="reference internal" href="_modules/lib/datasource/dummy.html#Dummy"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.datasource.dummy.Dummy" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="lib.datasource.abstract.html#lib.datasource.abstract.abstract_data_source.AbstractDataSource" title="lib.datasource.abstract.abstract_data_source.AbstractDataSource"><code class="xref py py-class docutils literal"><span class="pre">lib.datasource.abstract.abstract_data_source.AbstractDataSource</span></code></a></p>
+<p>開発用のダミーデータクラス</p>
+<dl class="method">
+<dt id="lib.datasource.dummy.Dummy.each">
+<code class="descname">each</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; typing.Iterator[lib.cell_data.CellData]<a class="reference internal" href="_modules/lib/datasource/dummy.html#Dummy.each"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.datasource.dummy.Dummy.each" title="Permalink to this definition">¶</a></dt>
+<dd><p>ダミーデータを20件、CellDataとしてジェネレートする。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Iterable[CellData]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">dummy data</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="lib-datasource-hatena-module">
-<h2>lib.datasource.hatena module<a class="headerlink" href="#lib-datasource-hatena-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-lib.datasource.hatena">
+<span id="lib-datasource-hatena-module"></span><h2>lib.datasource.hatena module<a class="headerlink" href="#module-lib.datasource.hatena" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="lib.datasource.hatena.Hatena">
+<em class="property">class </em><code class="descclassname">lib.datasource.hatena.</code><code class="descname">Hatena</code><span class="sig-paren">(</span><em>user_name: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/datasource/hatena.html#Hatena"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.datasource.hatena.Hatena" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="lib.datasource.abstract.html#lib.datasource.abstract.abstract_data_source.AbstractDataSource" title="lib.datasource.abstract.abstract_data_source.AbstractDataSource"><code class="xref py py-class docutils literal"><span class="pre">lib.datasource.abstract.abstract_data_source.AbstractDataSource</span></code></a></p>
+<p>はてなのRSSから特定ユーザーのブックマークを取得するクラス</p>
+<dl class="method">
+<dt id="lib.datasource.hatena.Hatena.each">
+<code class="descname">each</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; typing.Iterator[lib.cell_data.CellData]<a class="reference internal" href="_modules/lib/datasource/hatena.html#Hatena.each"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.datasource.hatena.Hatena.each" title="Permalink to this definition">¶</a></dt>
+<dd><p>取得したデータをCellDataとしてジェネレートする。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Iterator[CellData]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">hatena bookmark data</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.datasource.hatena.Hatena.endpoint">
+<code class="descname">endpoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/datasource/hatena.html#Hatena.endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.datasource.hatena.Hatena.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd><p>はてなのエンドポイントはユーザーによって変わるのでAbstractDataSourceからオーバーライド</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">end point</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="lib-datasource-twitter-module">
-<h2>lib.datasource.twitter module<a class="headerlink" href="#lib-datasource-twitter-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-lib.datasource.twitter">
+<span id="lib-datasource-twitter-module"></span><h2>lib.datasource.twitter module<a class="headerlink" href="#module-lib.datasource.twitter" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="lib.datasource.twitter.Twitter">
+<em class="property">class </em><code class="descclassname">lib.datasource.twitter.</code><code class="descname">Twitter</code><span class="sig-paren">(</span><em>consumer_key: str</em>, <em>consumer_secret: str</em>, <em>access_token: str</em>, <em>access_secret: str</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/datasource/twitter.html#Twitter"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.datasource.twitter.Twitter" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <a class="reference internal" href="lib.datasource.abstract.html#lib.datasource.abstract.abstract_data_source.AbstractDataSource" title="lib.datasource.abstract.abstract_data_source.AbstractDataSource"><code class="xref py py-class docutils literal"><span class="pre">lib.datasource.abstract.abstract_data_source.AbstractDataSource</span></code></a></p>
+<p>Twitter の like を取得するクラス</p>
+<dl class="method">
+<dt id="lib.datasource.twitter.Twitter.each">
+<code class="descname">each</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; typing.Iterable[lib.cell_data.CellData]<a class="reference internal" href="_modules/lib/datasource/twitter.html#Twitter.each"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.datasource.twitter.Twitter.each" title="Permalink to this definition">¶</a></dt>
+<dd><p>取得したデータをCellDataとしてジェネレートする。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Iterable[CellData]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">twitter liked data</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-lib.datasource">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lib.datasource" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -82,10 +167,10 @@
 <li><a class="reference internal" href="#">lib.datasource package</a><ul>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#lib-datasource-dummy-module">lib.datasource.dummy module</a></li>
-<li><a class="reference internal" href="#lib-datasource-hatena-module">lib.datasource.hatena module</a></li>
-<li><a class="reference internal" href="#lib-datasource-twitter-module">lib.datasource.twitter module</a></li>
-<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li><a class="reference internal" href="#module-lib.datasource.dummy">lib.datasource.dummy module</a></li>
+<li><a class="reference internal" href="#module-lib.datasource.hatena">lib.datasource.hatena module</a></li>
+<li><a class="reference internal" href="#module-lib.datasource.twitter">lib.datasource.twitter module</a></li>
+<li><a class="reference internal" href="#module-lib.datasource">Module contents</a></li>
 </ul>
 </li>
 </ul>

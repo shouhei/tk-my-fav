@@ -44,11 +44,48 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="lib-datasource-abstract-abstract-data-source-module">
-<h2>lib.datasource.abstract.abstract_data_source module<a class="headerlink" href="#lib-datasource-abstract-abstract-data-source-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-lib.datasource.abstract.abstract_data_source">
+<span id="lib-datasource-abstract-abstract-data-source-module"></span><h2>lib.datasource.abstract.abstract_data_source module<a class="headerlink" href="#module-lib.datasource.abstract.abstract_data_source" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="lib.datasource.abstract.abstract_data_source.AbstractDataSource">
+<em class="property">class </em><code class="descclassname">lib.datasource.abstract.abstract_data_source.</code><code class="descname">AbstractDataSource</code><a class="reference internal" href="_modules/lib/datasource/abstract/abstract_data_source.html#AbstractDataSource"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.datasource.abstract.abstract_data_source.AbstractDataSource" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<dl class="method">
+<dt id="lib.datasource.abstract.abstract_data_source.AbstractDataSource.each">
+<code class="descname">each</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; typing.Iterator[lib.cell_data.CellData]<a class="reference internal" href="_modules/lib/datasource/abstract/abstract_data_source.html#AbstractDataSource.each"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.datasource.abstract.abstract_data_source.AbstractDataSource.each" title="Permalink to this definition">¶</a></dt>
+<dd><p>取得したデータをCellDataとしてジェネレートする。</p>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">Iterable[CellData]</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">any data</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="classmethod">
+<dt id="lib.datasource.abstract.abstract_data_source.AbstractDataSource.endpoint">
+<em class="property">classmethod </em><code class="descname">endpoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span> &rarr; str<a class="reference internal" href="_modules/lib/datasource/abstract/abstract_data_source.html#AbstractDataSource.endpoint"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.datasource.abstract.abstract_data_source.AbstractDataSource.endpoint" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">endpoint url</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-lib.datasource.abstract">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lib.datasource.abstract" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -62,8 +99,8 @@
   <ul>
 <li><a class="reference internal" href="#">lib.datasource.abstract package</a><ul>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#lib-datasource-abstract-abstract-data-source-module">lib.datasource.abstract.abstract_data_source module</a></li>
-<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li><a class="reference internal" href="#module-lib.datasource.abstract.abstract_data_source">lib.datasource.abstract.abstract_data_source module</a></li>
+<li><a class="reference internal" href="#module-lib.datasource.abstract">Module contents</a></li>
 </ul>
 </li>
 </ul>

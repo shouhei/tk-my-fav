@@ -48,17 +48,17 @@
 <li class="toctree-l2"><a class="reference internal" href="lib.datasource.html#subpackages">Subpackages</a><ul>
 <li class="toctree-l3"><a class="reference internal" href="lib.datasource.abstract.html">lib.datasource.abstract package</a><ul>
 <li class="toctree-l4"><a class="reference internal" href="lib.datasource.abstract.html#submodules">Submodules</a></li>
-<li class="toctree-l4"><a class="reference internal" href="lib.datasource.abstract.html#lib-datasource-abstract-abstract-data-source-module">lib.datasource.abstract.abstract_data_source module</a></li>
-<li class="toctree-l4"><a class="reference internal" href="lib.datasource.abstract.html#module-contents">Module contents</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lib.datasource.abstract.html#module-lib.datasource.abstract.abstract_data_source">lib.datasource.abstract.abstract_data_source module</a></li>
+<li class="toctree-l4"><a class="reference internal" href="lib.datasource.abstract.html#module-lib.datasource.abstract">Module contents</a></li>
 </ul>
 </li>
 </ul>
 </li>
 <li class="toctree-l2"><a class="reference internal" href="lib.datasource.html#submodules">Submodules</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lib.datasource.html#lib-datasource-dummy-module">lib.datasource.dummy module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lib.datasource.html#lib-datasource-hatena-module">lib.datasource.hatena module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lib.datasource.html#lib-datasource-twitter-module">lib.datasource.twitter module</a></li>
-<li class="toctree-l2"><a class="reference internal" href="lib.datasource.html#module-contents">Module contents</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lib.datasource.html#module-lib.datasource.dummy">lib.datasource.dummy module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lib.datasource.html#module-lib.datasource.hatena">lib.datasource.hatena module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lib.datasource.html#module-lib.datasource.twitter">lib.datasource.twitter module</a></li>
+<li class="toctree-l2"><a class="reference internal" href="lib.datasource.html#module-lib.datasource">Module contents</a></li>
 </ul>
 </li>
 </ul>
@@ -67,14 +67,107 @@
 <div class="section" id="submodules">
 <h2>Submodules<a class="headerlink" href="#submodules" title="Permalink to this headline">¶</a></h2>
 </div>
-<div class="section" id="lib-cell-data-module">
-<h2>lib.cell_data module<a class="headerlink" href="#lib-cell-data-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-lib.cell_data">
+<span id="lib-cell-data-module"></span><h2>lib.cell_data module<a class="headerlink" href="#module-lib.cell_data" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="lib.cell_data.CellData">
+<em class="property">class </em><code class="descclassname">lib.cell_data.</code><code class="descname">CellData</code><span class="sig-paren">(</span><em>date: datetime.datetime</em>, <em>text: str = None</em>, <em>url: str = None</em>, <em>image: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/cell_data.html#CellData"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.cell_data.CellData" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>api や rss を叩いて取得したデータを、このクラスに詰めて、各データを均一化する</p>
+<dl class="attribute">
+<dt id="lib.cell_data.CellData.date">
+<code class="descname">date</code><a class="headerlink" href="#lib.cell_data.CellData.date" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lib.cell_data.CellData.image">
+<code class="descname">image</code><a class="headerlink" href="#lib.cell_data.CellData.image" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lib.cell_data.CellData.text">
+<code class="descname">text</code><a class="headerlink" href="#lib.cell_data.CellData.text" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="attribute">
+<dt id="lib.cell_data.CellData.url">
+<code class="descname">url</code><a class="headerlink" href="#lib.cell_data.CellData.url" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
 </div>
-<div class="section" id="lib-data-source-manager-module">
-<h2>lib.data_source_manager module<a class="headerlink" href="#lib-data-source-manager-module" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="module-lib.data_source_manager">
+<span id="lib-data-source-manager-module"></span><h2>lib.data_source_manager module<a class="headerlink" href="#module-lib.data_source_manager" title="Permalink to this headline">¶</a></h2>
+<dl class="class">
+<dt id="lib.data_source_manager.DataSourceManager">
+<em class="property">class </em><code class="descclassname">lib.data_source_manager.</code><code class="descname">DataSourceManager</code><span class="sig-paren">(</span><em>data_source_list: typing.List[lib.datasource.abstract.abstract_data_source.AbstractDataSource] = []</em>, <em>order_by: str = None</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data_source_manager.html#DataSourceManager"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data_source_manager.DataSourceManager" title="Permalink to this definition">¶</a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal"><span class="pre">object</span></code></p>
+<p>各種データソースをまとめるクラス</p>
+<div class="admonition-todo admonition" id="index-0">
+<p class="first admonition-title">Todo</p>
+<p class="last">実データのリスト(self.__data)が別クラスになっているべき</p>
 </div>
-<div class="section" id="module-contents">
-<h2>Module contents<a class="headerlink" href="#module-contents" title="Permalink to this headline">¶</a></h2>
+<dl class="method">
+<dt id="lib.data_source_manager.DataSourceManager.get">
+<code class="descname">get</code><span class="sig-paren">(</span><em>refresh: bool = False</em><span class="sig-paren">)</span> &rarr; typing.List[lib.cell_data.CellData]<a class="reference internal" href="_modules/lib/data_source_manager.html#DataSourceManager.get"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data_source_manager.DataSourceManager.get" title="Permalink to this definition">¶</a></dt>
+<dd><div class="admonition-todo admonition" id="index-1">
+<p class="first admonition-title">Todo</p>
+<p class="last">if self.__order_by の箇所は別クラスが持つべき</p>
+</div>
+<table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>refresh</strong> (<em>bool</em>) &#8211; データを更新するか否か</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">List[CellData]</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body">実データの入ったリストを返す</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="attribute">
+<dt id="lib.data_source_manager.DataSourceManager.order_by">
+<code class="descname">order_by</code><a class="headerlink" href="#lib.data_source_manager.DataSourceManager.order_by" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body">str</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body">データの並び順を決定するプロパティを返す</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.data_source_manager.DataSourceManager.register">
+<code class="descname">register</code><span class="sig-paren">(</span><em>obj: lib.datasource.abstract.abstract_data_source.AbstractDataSource</em><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data_source_manager.html#DataSourceManager.register"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data_source_manager.DataSourceManager.register" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><strong>obj</strong> (<a class="reference internal" href="lib.datasource.abstract.html#lib.datasource.abstract.abstract_data_source.AbstractDataSource" title="lib.datasource.abstract.abstract_data_source.AbstractDataSource"><em>AbstractDataSource</em></a>) &#8211; データソースを追加する</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="lib.data_source_manager.DataSourceManager.update">
+<code class="descname">update</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/lib/data_source_manager.html#DataSourceManager.update"><span class="viewcode-link">[source]</span></a><a class="headerlink" href="#lib.data_source_manager.DataSourceManager.update" title="Permalink to this definition">¶</a></dt>
+<dd><p>get の refresh引数がTrueのエイリアス</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="module-lib">
+<span id="module-contents"></span><h2>Module contents<a class="headerlink" href="#module-lib" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
@@ -89,9 +182,9 @@
 <li><a class="reference internal" href="#">lib package</a><ul>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
-<li><a class="reference internal" href="#lib-cell-data-module">lib.cell_data module</a></li>
-<li><a class="reference internal" href="#lib-data-source-manager-module">lib.data_source_manager module</a></li>
-<li><a class="reference internal" href="#module-contents">Module contents</a></li>
+<li><a class="reference internal" href="#module-lib.cell_data">lib.cell_data module</a></li>
+<li><a class="reference internal" href="#module-lib.data_source_manager">lib.data_source_manager module</a></li>
+<li><a class="reference internal" href="#module-lib">Module contents</a></li>
 </ul>
 </li>
 </ul>
