@@ -88,6 +88,7 @@ class BindLabel(object):
 class TkMyFav(tk.Frame):
     def __init__(self, root: tk.Tk, data_source: DataSourceManager):
         self.__data_source = data_source
+        root.title("tk-my-fav")
         tk.Frame.__init__(self, root)
         self.__canvas = tk.Canvas(root, borderwidth=0, width=500, height=500)
         self.__frame = tk.Frame(self.__canvas)
