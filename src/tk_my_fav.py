@@ -1,17 +1,9 @@
-# tk 関連
 import tkinter as tk
-
 from PIL import Image as PILImage
 from PIL import ImageTk as PILImageTk
-
-# 標準モジュール
 from urllib import request
 from typing import List
-
-# pip
 from webbrowser import open_new_tab
-
-# 自作
 from lib.datasource.twitter import Twitter
 from config.twitter import CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_SECRET
 from lib.datasource.hatena import Hatena
@@ -59,6 +51,7 @@ class BindLabel(object):
     def text(frame: tk.Frame, data: CellData, row_number: int, column_number: int=TEXT_COLUMN_NUMBER):
         """
         CellDataのテキストを利用し、フレームにLabelを表示する
+
         :param tk.Frame frame: tkのフレームオブジェクト
         :param CellData data:  CellData
         :param int row_number: 何行目に表示するか
@@ -73,6 +66,7 @@ class BindLabel(object):
     def image(frame: tk.Frame, data: CellData, row_number: int, column_number: int=IMAGE_COLUMN_NUMBER):
         """
         CellDataのimageを利用し、フレームにLabelを表示する
+
         :param tk.Frame frame: tkのフレームオブジェクト
         :param CellData data:  CellData
         :param int row_number: 何行目に表示するか

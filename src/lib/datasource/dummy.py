@@ -18,6 +18,7 @@ class Dummy(AbstractDataSource):
     def each(self) -> Iterator[CellData]:
         """
         ダミーデータを20件、CellDataとしてジェネレートする。
+
         :rtype: Iterable[CellData]
         :return: dummy data
         """

@@ -21,7 +21,9 @@ class AbstractDataSource(metaclass=ABCMeta):
     def _get(self) -> Response:
         """
         データを実際に取得するメソッド。
+
         基本的に外部からは呼ばない。
+
         :rtype: Response
         :return: Response is from requests
         """
@@ -31,6 +33,7 @@ class AbstractDataSource(metaclass=ABCMeta):
     def each(self) -> Iterator[CellData]:
         """
         取得したデータをCellDataとしてジェネレートする。
+
         :rtype: Iterable[CellData]
         :return: any data
         """

@@ -6,7 +6,8 @@ from lib.datasource.abstract.abstract_data_source import AbstractDataSource
 class DataSourceManager(object):
     """
     各種データソースをまとめるクラス
-    TODO: 実データのリスト(self.__data)が別クラスになっているべき
+
+    .. todo:: 実データのリスト(self.__data)が別クラスになっているべき
     """
     def __init__(self, data_source_list: List[AbstractDataSource]=[], order_by: str=None):
         """
@@ -42,7 +43,8 @@ class DataSourceManager(object):
 
     def get(self, refresh: bool=False) -> List[CellData]:
         """
-        TODO: if self.__order_by の箇所は別クラスが持つべき
+        .. todo:: if self.__order_by の箇所は別クラスが持つべき
+
         :param bool refresh: データを更新するか否か
         :rtype: List[CellData]
         :return: 実データの入ったリストを返す

@@ -24,6 +24,7 @@ class Hatena(AbstractDataSource):
     def endpoint(self):
         """
         はてなのエンドポイントはユーザーによって変わるのでAbstractDataSourceからオーバーライド
+
         :rtype: str
         :return: end point
         """
@@ -32,7 +33,9 @@ class Hatena(AbstractDataSource):
     def _get(self):
         """
         データを実際に取得するメソッド。
+
         基本的に外部からは呼ばない。
+
         :rtype: Response
         :return: Response is from requests
         """
@@ -41,6 +44,7 @@ class Hatena(AbstractDataSource):
     def each(self) -> Iterator[CellData]:
         """
         取得したデータをCellDataとしてジェネレートする。
+
         :rtype: Iterator[CellData]
         :return: hatena bookmark data
         """

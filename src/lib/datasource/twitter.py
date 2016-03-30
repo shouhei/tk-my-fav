@@ -30,7 +30,9 @@ class Twitter(AbstractDataSource):
     def _get(self) -> Response:
         """
         データを実際に取得するメソッド。
+
         基本的に外部からは呼ばない。
+
         :rtype: Response
         :return: Response is from requests
         """
@@ -39,6 +41,7 @@ class Twitter(AbstractDataSource):
     def each(self) -> Iterable[CellData]:
         """
         取得したデータをCellDataとしてジェネレートする。
+
         :rtype: Iterable[CellData]
         :return: twitter liked data
         """
