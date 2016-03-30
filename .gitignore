@@ -1,0 +1,5 @@
+.idea
+*.pyc
+__pychache__
+src/config/*.py
+!src/config/__init__.py
